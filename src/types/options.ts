@@ -273,6 +273,9 @@ export interface ParsedOptions {
   disableMobile: boolean;
   enable: DateLimit<Date>[];
   enableSeconds: boolean;
+  extractHours?: (dateLike: Date | string) => number;
+  extractMinutes?: (dateLike: Date | string) => number;
+  extractSeconds?: (dateLike: Date | string) => number;
   enableTime: boolean;
   errorHandler: (err: Error) => void;
   formatDate?: Options["formatDate"];

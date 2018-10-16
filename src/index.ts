@@ -1019,9 +1019,12 @@ function FlatpickrInstance(
 
     self.hourElement.tabIndex = self.minuteElement.tabIndex = -1;
 
+    const { extractHours, extractMinutes, extractSeconds } = self.config;
+
     self.hourElement.value = pad(
       self.latestSelectedDateObj
-        ? self.latestSelectedDateObj.getHours()
+        ? (extractHours && extractHours(self.latestSelectedDateObj)) ||
+          self.latestSelectedDateObj.getHours()
         : self.config.time_24hr
           ? self.config.defaultHour
           : military2ampm(self.config.defaultHour)
@@ -1029,7 +1032,8 @@ function FlatpickrInstance(
 
     self.minuteElement.value = pad(
       self.latestSelectedDateObj
-        ? self.latestSelectedDateObj.getMinutes()
+        ? (extractMinutes && extractMinutes(self.latestSelectedDateObj)) ||
+          self.latestSelectedDateObj.getMinutes()
         : self.config.defaultMinute
     );
 
@@ -1070,7 +1074,8 @@ function FlatpickrInstance(
 
       self.secondElement.value = pad(
         self.latestSelectedDateObj
-          ? self.latestSelectedDateObj.getSeconds()
+          ? (extractSeconds && extractSeconds(self.latestSelectedDateObj)) ||
+            self.latestSelectedDateObj.getSeconds()
           : self.config.defaultSeconds
       );
 
